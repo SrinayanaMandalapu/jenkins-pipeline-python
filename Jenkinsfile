@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo '🔹 Checking out source code...'
-                git branch: 'master', url: 'https://github.com/<your-username>/jenkins-pipeline-python.git'
+                git branch: 'master', url: 'https://github.com/SrinayanaMandalapu/jenkins-pipeline-python.git'
             }
         }
 
