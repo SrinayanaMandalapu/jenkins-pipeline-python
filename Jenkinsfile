@@ -1,17 +1,12 @@
 pipeline {
     agent any
 
-    environment {
-        PYTHON = "C:\\Users\\manda\\AppData\\Local\\Programs\\Python\\Python312"  // or your Python path
-        PATH = "${PYTHON};${PYTHON}\\Scripts;${env.PATH}"
-    }
-
     stages {
 
         stage('Checkout') {
             steps {
                 echo '🔹 Checking out source code...'
-                git branch: 'master', url: 'https://github.com/<your-username>/jenkins-pipeline-python.git'
+                git branch: 'main', url: 'https://github.com/SrinayanaMandalapu/jenkins-pipeline-python.git'
             }
         }
 
@@ -26,7 +21,7 @@ pipeline {
             steps {
                 echo '🔹 Running pytest...'
                 bat 'pip install pytest'
-                bat 'pytest --maxfail=1 --disable-warnings -q'
+                bat 'pytest test_app.py'
             }
         }
 
