@@ -1,7 +1,15 @@
 pipeline {
     agent any
 
+
+    environment {
+        PYTHON = "C:\\Users\\manda\\AppData\\Local\\Programs\\Python\\Python312" 
+        PATH = "${PYTHON};${PYTHON}\\Scripts;${env.PATH}"
+    }
+
+
     stages {
+
 
         stage('Checkout') {
             steps {
@@ -10,6 +18,7 @@ pipeline {
             }
         }
 
+
         stage('Install Dependencies') {
             steps {
                 echo '🔹 Installing dependencies using pip...'
@@ -17,13 +26,15 @@ pipeline {
             }
         }
 
+
         stage('Run Tests') {
             steps {
                 echo '🔹 Running pytest...'
                 bat 'pip install pytest'
-                bat 'pytest test_app.py'
+                bat 'pytest --maxfail=1 --disable-warnings -q'
             }
         }
+
 
         stage('Archive Artifacts') {
             steps {
@@ -32,6 +43,7 @@ pipeline {
             }
         }
     }
+
 
     post {
         success {
@@ -42,3 +54,5 @@ pipeline {
         }
     }
 }
+
+
